@@ -1,0 +1,84 @@
+﻿@page
+@model StaffPortal.Pages.StaffRequests.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffRequest[0].Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffRequest[0].Forename)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffRequest[0].RoomNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffRequest[0].Campus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffRequest[0].Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffRequest[0].EmployeeType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffRequest[0].AgencyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffRequest[0].PhoneExtension)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffRequest[0].JobTitle)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.StaffRequest) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Forename)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Campus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgencyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneExtension)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobTitle)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.StaffRequestID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.StaffRequestID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.StaffRequestID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

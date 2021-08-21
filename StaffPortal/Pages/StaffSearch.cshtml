@@ -1,0 +1,64 @@
+﻿@page
+@model StaffPortal.Pages.StaffSearchModel
+@{
+    ViewData["Title"] = "Staff Search";
+}
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md">
+            <h2>
+                <i class="fas fa-address-book"></i> Staff Search
+            </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md">
+            <div class="bd-callout bd-callout-info">
+                <div class="alert alert-primary" role="alert">
+                    Use the search box to find staff by name or staff ref
+                </div>
+                <div class="row" id="SearchBoxStaff">
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            <button type="button" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                            <input type="text" class="form-control" id="StaffSearchID">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-success btn-block StaffSearchButton"><i class="fas fa-search"></i> Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <div class="bd-callout bd-callout-info">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    If you need to request a new member of staff then please click the botton to the right and complete the new staff member form.
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <button type="button" class="btn btn-secondary StaffRequestButton" data-bs-toggle="modal" data-bs-target="#ModalStaffRequest" data-id="0" data-selector="StaffID" data-path="Create" data-loading-text="Add New Staff Member">
+                                        <i class="fas fa-user-plus"></i> Request New Member of Staff
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<partial name="_StaffSearchModalsPartial" model="Model" />
+
+<!-- Hidden Inputs -->
+<partial name="_StaffSearchHiddenInputsPartial" model="Model" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_StaffSearchScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

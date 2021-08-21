@@ -1,0 +1,171 @@
+﻿body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/*Stop modals from expanding past screen height*/
+.modal-body {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+body.modal-open #LoadingModal {
+    display: flex !important;
+    height: 100%;
+} 
+
+body.modal-open #LoadingModal .modal-dialog {
+    margin: auto;
+    width: 400px;
+}
+
+.DataLoading h1 {
+    text-align: center;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    font-size: 3em;
+}
+
+.Spinner {
+    font-size: 2em;
+}
+
+.LoadingArea {
+    padding: 20px;
+    font-size: 3em;
+    background-color: #eeeeee;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+}
+
+nav .NavLogo {
+    margin-top: -10px;
+    margin-bottom: -10px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    padding: 2px;
+}
+
+h1.LoadingAnim {
+    font-size: 4em;
+}
+
+.Icon {
+    font-size: 1em;
+    text-align: center;
+    width: 100%;
+    margin: auto;
+}
+
+.CreatedBy {
+    margin-top: 8px;
+    margin-bottom: -8px;
+    margin-right: -8px;
+    font-size: 0.8em;
+}
+
+.IconBlue {
+    color: #0D47A1;
+}
+.IconOrange {
+    color: #F57F17;
+}
+.IconPink {
+    color: #880E4F;
+}
+.IconGrey {
+    color: #263238;
+}
+
+.NewsBlock {
+    cursor: pointer;
+}
+
+#StaffSearchResultsArea p {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+#StaffSearchResultsArea .StaffPhoto {
+    max-width: 100px;
+    border-radius: 50%;
+}
+
+#StaffSearchResultsArea .NoPhoto {
+    font-size: 4em;
+    background-color: #cfe2ff;
+    color: #0d6efd;
+    border-radius: 50%;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}
+
+.bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-left-width: .25rem;
+    border-radius: .25rem
+}
+
+.bd-callout h4 {
+    margin-top: 0;
+    margin-bottom: .25rem
+}
+
+.bd-callout p:last-child {
+    margin-bottom: 0
+}
+
+.bd-callout code {
+    border-radius: .25rem
+}
+
+.bd-callout + .bd-callout {
+    margin-top: -.25rem
+}
+
+.bd-callout-info {
+    border-left-color: #5bc0de
+}
+
+.bd-callout-info h4 {
+    color: #5bc0de
+}
+
+.bd-callout-warning {
+    border-left-color: #f0ad4e
+}
+
+.bd-callout-warning h4 {
+    color: #f0ad4e
+}
+
+.bd-callout-danger {
+    border-left-color: #d9534f
+}
+
+.bd-callout-danger h4 {
+    color: #d9534f
+}
+
+textarea.form-control {
+    height: 200px;
+}
+
+.CollegeLogoPageTop {
+    max-width: 180px;
+}
+
+.RoundedImage {
+    border-radius: 0.3em;
+}
+
+.Iframe {
+    height: 600px;
+}
+
+.CollegeSystems .card img {
+    padding: 20px;
+}

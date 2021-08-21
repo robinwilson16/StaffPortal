@@ -1,0 +1,241 @@
+﻿@page "{search?}"
+@model StaffPortal.Pages.StaffDetails.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].StaffRef)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].Forename)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].Email2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].Tel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].Ext)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].Mobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].SiteCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].SiteName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].RoomCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].RoomName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].StaffTypeCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].StaffTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].CollegeLevelCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].CollegeLevelName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].CollegeLevels)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].ContractNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].ContractRef)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].MainJobPostTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].MainJobFTE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].MainJobStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].MainJobLeaveDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].MainJobPostActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].MainJobContractHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].MainJobContactHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].PostTitles)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].TotalFTE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].EarliestStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].LatestLeaveDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].TotalContractHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].TotalContactHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].EmployeeStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffDetail[0].EmailForwarding)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.StaffDetail)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StaffRef)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Forename)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ext)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mobile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Photo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SiteCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SiteName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StaffTypeCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StaffTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CollegeLevelCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CollegeLevelName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CollegeLevels)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractRef)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MainJobPostTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MainJobFTE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MainJobStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MainJobLeaveDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MainJobPostActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MainJobContractHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MainJobContactHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostTitles)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalFTE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EarliestStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LatestLeaveDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalContractHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalContactHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailForwarding)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.StaffDetailID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.StaffDetailID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.StaffDetailID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

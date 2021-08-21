@@ -1,0 +1,73 @@
+﻿@page
+@model StaffPortal.Pages.StaffRequests.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>StaffRequest</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StaffRequest.Surname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StaffRequest.Surname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StaffRequest.Forename)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StaffRequest.Forename)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StaffRequest.RoomNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StaffRequest.RoomNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StaffRequest.Campus)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StaffRequest.Campus)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StaffRequest.Department)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StaffRequest.Department)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StaffRequest.EmployeeType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StaffRequest.EmployeeType)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StaffRequest.AgencyName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StaffRequest.AgencyName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StaffRequest.PhoneExtension)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StaffRequest.PhoneExtension)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StaffRequest.JobTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StaffRequest.JobTitle)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.StaffRequest.StaffRequestID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

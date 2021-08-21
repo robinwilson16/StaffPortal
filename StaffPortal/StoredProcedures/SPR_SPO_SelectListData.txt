@@ -1,0 +1,37 @@
+CREATE PROCEDURE [dbo].[SPR_SPO_SelectListData]
+    @AcademicYear NVARCHAR(5),
+    @Domain NVARCHAR(255)
+AS
+BEGIN
+	SET XACT_ABORT, NOCOUNT ON;
+
+	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+
+	--DECLARE @Domain NVARCHAR(255) = 'ACADEMIC_YEAR'
+
+    DECLARE @SQLString NVARCHAR(MAX);
+    DECLARE @SQLParams NVARCHAR(MAX);
+
+    IF @Domain = 'ACADEMIC_YEAR'
+        SELECT
+            Code = AY.AcademicYearID,
+            Description = AY.AcademicYearID
+        FROM ProSolution.dbo.AcademicYear AY
+        WHERE
+            AY.Enabled = 1
+        ORDER BY
+            AY.AcademicYearID
+	ELSE IF @Domain = 'CAMPUS'
+        SELECT
+			Code = STE.Code,
+			Description = STE.Description
+		FROM ProSolution.dbo.Site STE
+		WHERE
+			STE.MayHoldEvents = 1
+		ORDER BY
+			STE.Description
+	ELSE
+        SELECT
+			Code = '',
+			Description = '-- ERROR --'
+END

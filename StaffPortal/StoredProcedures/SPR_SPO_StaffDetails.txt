@@ -1,0 +1,265 @@
+CREATE PROCEDURE SPR_SPO_StaffDetails
+	@Search NVARCHAR(255)
+AS
+	BEGIN
+	SET XACT_ABORT, NOCOUNT ON;
+	SET DATEFORMAT ymd;
+
+	--DECLARE @Search NVARCHAR(255) = ''
+
+	--ProSolution Staff
+	SELECT
+		StaffDetailID = STF.StaffID,
+		StaffRef = STF.StaffRefNo,
+		Surname = STF.Surname,
+		Forename = STF.FirstName,
+		Email = SU.EmailAddress,
+		Email2 = NULL,
+		Tel = STF.CollegePhoneNumber,
+		Ext = NULL,
+		Mobile = STF.MobileTel,
+		Photo = PHO.Photo,
+		SiteCode = STE.Code,
+		SiteName = STE.Description,
+		RoomCode = RM.RoomNo,
+		RoomName = RM.Description,
+		StaffTypeCode = STF.StaffTypeID,
+		StaffTypeName = STFT.StaffType,
+		CollegeLevelCode = CL.Code,
+		CollegeLevelName = CL.Name,
+		CollegeLevels = 
+			STUFF (
+				(
+					SELECT 
+						', ' + CL.Code
+					FROM ProSolution.dbo.StaffCollegeLevelMembership SCL
+					LEFT JOIN ProSolution.dbo.CollegeLevel CL
+						ON CL.SID = SCL.SID
+					WHERE 
+						SCL.StaffID = STF.StaffID
+						--AND CON.Enabled = 1
+						--AND CAST ( COALESCE ( CON.LeavingDate, GETDATE() ) AS DATE ) <= CAST ( GETDATE() AS DATE )
+					ORDER BY 
+						CL.Enabled,
+						CL.IsAcademic DESC,
+						CL.LevelNum,
+						SCL.MainCollegeLevel DESC,
+						SCL.StaffCollegeLevelMembershipID
+					FOR XML PATH(''),
+					TYPE 
+				).value('.','varchar(max)') ,1,2, '' 
+			),
+		ContractNo = JOB.ContractNo,
+		ContractRef = JOB.ContractRef,
+		MainJobPostTitle = JOB.PostTitle,
+		MainJobFTE = COALESCE ( JOB.FTE, 0 ),
+		MainJobStartDate = JOB.StartDate,
+		MainJobLeaveDate = JOB.LeaveDate,
+		MainJobPostActive = JOB.PostActive,
+		MainJobContractHours = COALESCE ( JOB.ContractHours, 0 ),
+		MainJobContactHours = COALESCE ( JOB.ContactHours, 0 ),
+		PostTitles = 
+			STUFF (
+				(
+					SELECT 
+						', ' + CON.PostTitle
+					FROM ProSolution.dbo.StaffContract CON
+					WHERE 
+						CON.StaffID = STF.StaffID
+						--AND CON.Enabled = 1
+						--AND CAST ( COALESCE ( CON.LeavingDate, GETDATE() ) AS DATE ) <= CAST ( GETDATE() AS DATE )
+					ORDER BY 
+						CON.Enabled DESC,
+						CASE
+							WHEN CAST ( COALESCE ( CON.LeavingDate, GETDATE() ) AS DATE ) <= CAST ( GETDATE() AS DATE ) THEN 1
+							ELSE 2
+						END,
+						CON.FractionOfFulltime DESC,
+						CON.ClassContactHours DESC,
+						CON.ContractHours DESC,
+						CON.DateOfAppointment,
+						CON.StaffContractID
+					FOR XML PATH(''),
+					TYPE 
+				).value('.','varchar(max)') ,1,2, '' 
+			),
+		TotalFTE = COALESCE ( JOB.FTE, 0 ),
+		EarliestStartDate = JOBA.StartDate,
+		LatestLeaveDate = JOBA.LeaveDate,
+		TotalContractHours = COALESCE ( JOBA.ContractHours, 0 ),
+		TotalContactHours = COALESCE ( JOBA.ContactHours, 0 ),
+		EmployeeStatus = NULL,
+		EmailForwarding = NULL
+	FROM ProSolution.dbo.Staff STF
+	INNER JOIN ProSolution.dbo._CCC_SystemUser SU
+		ON SU.SystemUserID = STF.SystemUserID
+	LEFT JOIN ProSolution.dbo.Site STE
+		ON STE.SiteID = STF.SiteID
+	LEFT JOIN ProSolution.dbo.Room RM
+		ON RM.RoomID = STF.RoomID
+	LEFT JOIN ProSolution.dbo.StaffType STFT
+		ON STFT.StaffTypeID = STF.StaffTypeID
+	LEFT JOIN ProSolution.dbo.StaffPhoto PHO
+		ON PHO.StaffID = STF.StaffID
+	LEFT JOIN (
+		SELECT
+			SCL.StaffID,
+			CollegeLevelID = SCL.SID,
+			IsMainCollegeLevel = SCL.MainCollegeLevel,
+			RowNum = 
+				ROW_NUMBER () OVER (
+					PARTITION BY
+						SCL.StaffID
+					ORDER BY
+						SCL.MainCollegeLevel DESC,
+						CL.Enabled,
+						CL.IsAcademic DESC,
+						CL.LevelNum DESC,
+						SCL.StaffCollegeLevelMembershipID
+				)
+		FROM ProSolution.dbo.StaffCollegeLevelMembership SCL
+		LEFT JOIN ProSolution.dbo.CollegeLevel CL
+			ON CL.SID = SCL.SID
+	) CLM
+		ON CLM.StaffID = STF.StaffID
+	LEFT JOIN ProSolution.dbo.CollegeLevel CL
+		ON CL.SID = CLM.CollegeLevelID
+	LEFT JOIN (
+		SELECT
+			StaffID = CON.StaffID,
+			ContractNo = CON.ContractNo,
+			ContractRef = CON.ContractRef,
+			PostTitle = CON.PostTitle,
+			FTE = CON.FractionOfFulltime,
+			StartDate = CON.DateOfAppointment,
+			LeaveDate = CON.LeavingDate,
+			PostActive = CON.Enabled,
+			ContractHours = CON.ContractHours,
+			ContactHours = CON.ClassContactHours,
+			RowNum = 
+				ROW_NUMBER () OVER (
+					PARTITION BY
+						CON.StaffID
+					ORDER BY
+						CON.Enabled DESC,
+						CASE
+							WHEN CAST ( COALESCE ( CON.LeavingDate, GETDATE() ) AS DATE ) <= CAST ( GETDATE() AS DATE ) THEN 1
+							ELSE 2
+						END,
+						CON.FractionOfFulltime DESC,
+						CON.ClassContactHours DESC,
+						CON.ContractHours DESC,
+						CON.DateOfAppointment,
+						CON.StaffContractID
+				)
+		FROM ProSolution.dbo.StaffContract CON
+		--WHERE
+			--CON.Enabled = 1
+			--AND CAST ( COALESCE ( CON.LeavingDate, GETDATE() ) AS DATE ) <= CAST ( GETDATE() AS DATE )
+	) JOB
+		ON JOB.StaffID = STF.StaffID
+		AND JOB.RowNum = 1
+	LEFT JOIN (
+		SELECT
+			StaffID = CON.StaffID,
+			NumPosts = COUNT ( CON.StaffContractID ),
+			FTE = ROUND ( SUM ( CON.FractionOfFulltime ), 2 ),
+			StartDate = MIN ( CON.DateOfAppointment ),
+			LeaveDate = MAX ( CON.LeavingDate ),
+			ContractHours = ROUND ( SUM ( CON.ContractHours ), 2 ),
+			ContactHours = ROUND ( SUM ( CON.ClassContactHours ), 2 )
+		FROM ProSolution.dbo.StaffContract CON
+		GROUP BY
+			CON.StaffID
+		--WHERE
+			--CON.Enabled = 1
+			--AND CAST ( COALESCE ( CON.LeavingDate, GETDATE() ) AS DATE ) <= CAST ( GETDATE() AS DATE )
+	) JOBA
+		ON JOBA.StaffID = STF.StaffID
+	LEFT JOIN (
+		SELECT
+			StaffRef = STF.stano
+		FROM activa.centime3.dbo.staff STF
+		WHERE
+			COALESCE ( STF.employeestatus, - 1) <> '6'
+	) CEN
+		ON CEN.StaffRef = STF.StaffRefNo
+	WHERE
+		STF.IsCurrent = 1
+		AND CAST ( COALESCE ( STF.LeavingDate, GETDATE() ) AS DATE ) <= CAST ( GETDATE() AS DATE )
+		AND CEN.StaffRef IS NULL
+		AND (
+			STF.Surname LIKE '%' + @Search + '%'
+			OR STF.FirstName LIKE '%' + @Search + '%'
+			OR STF.StaffRefNo LIKE '%' + @Search + '%'
+		)
+
+	--Legacy Staff
+	UNION ALL
+
+	SELECT 
+		StaffDetailID = 9900000 + STF.stano,
+		StaffRef = STF.stano,
+		Surname = STF.surname,
+		Forename = STF.firstname,
+		Email = STF.email,
+		Email2 = STF.email2,
+		Tel = STF.ddi,
+		Ext = STF.newext,
+		Mobile = STF.mobilephone,
+		Photo = PHO.Photo,
+		SiteCode = STE.site_code,
+		SiteName = STE.site_name,
+		RoomCode = STF.room,
+		RoomName = NULL,
+		StaffTypeCode = EMPS.lookup_id,
+		StaffTypeName = EMPS.description,
+		CollegeLevelCode = CL.cost_centre,
+		CollegeLevelName = CL.description,
+		CollegeLevels = CL.description,
+		ContractNo = NULL,
+		ContractRef = NULL,
+		MainJobPostTitle = STF.description,
+		MainJobFTE = NULL,
+		MainJobStartDate = STF.start_date,
+		MainJobLeaveDate = STF.end_date,
+		MainJobPostActive = STF.status_account,
+		MainJobContractHours = STF.contract_hours,
+		MainJobContactHours = 0,
+		PostTitles = STF.description,
+		TotalFTE = NULL,
+		EarliestStartDate = STF.start_date,
+		LatestLeaveDate = STF.end_date,
+		TotalContractHours = STF.contract_hours,
+		TotalContactHours = NULL,
+		EmployeeStatus = STF.employeestatus,
+		EmailForwarding = STF.email2_forwarding
+	FROM activa.centime3.dbo.staff STF
+	LEFT JOIN activa.centime3.dbo.site_tbl STE 
+		ON STE.site_code = COALESCE ( STF.site_code, 'U' )
+	LEFT JOIN activa.centime3.dbo.oo_sections_tbl CL 
+		ON CL.cs_id = STF.cs_id
+	LEFT JOIN activa.centime3.dbo.zlookup_tbl EMPS
+		ON EMPS.lookup_value = STF.employeestatus
+		AND EMPS.lookup_name = 'employeestatus'
+	LEFT JOIN ProSolution.dbo.Staff STF2
+		ON STF2.StaffRefNo = CAST ( STF.stano AS VARCHAR(50) )
+	LEFT JOIN ProSolution.dbo.StaffPhoto PHO
+		ON PHO.StaffID = STF2.StaffID
+	WHERE 
+		STF.surname NOT LIKE '0%'
+		AND STF.surname NOT LIKE '1%'
+		AND COALESCE ( STF.status, ' ') = 'L'
+		AND STF.description NOT LIKE '*%'
+		AND COALESCE ( STF.employeestatus, - 1) <> '6'
+		AND (
+			STF.surname LIKE '%' + @Search + '%'
+			OR STF.firstname LIKE '%' + @Search + '%'
+			OR STF.stano LIKE '%' + @Search + '%'
+		)
+
+	ORDER BY
+		Surname,
+		Forename,
+		StaffRef
+END

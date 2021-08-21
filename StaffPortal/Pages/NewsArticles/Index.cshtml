@@ -1,0 +1,144 @@
+﻿@page "{newsType}"
+@model StaffPortal.Pages.NewsArticles.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].CategoryID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].DisplayFromDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].DisplayToDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].IntroText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].MainText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].NewsType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].NewsClass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].IconID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].IconPath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].NumComments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].NumViews)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].ArticleLink)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].CreatedBySurname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].CreatedByForename)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].CreatedByName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.News[0].CreatedByEmail)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.News) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisplayFromDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisplayToDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IntroText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MainText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NewsType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NewsClass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IconID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IconPath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumComments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumViews)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleLink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBySurname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedByForename)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedByName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedByEmail)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.NewsID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.NewsID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.NewsID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

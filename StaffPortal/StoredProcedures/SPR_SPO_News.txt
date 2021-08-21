@@ -1,0 +1,135 @@
+CREATE PROCEDURE SPR_SPO_News
+	@NewsType NVARCHAR(50)
+AS
+	BEGIN
+	SET XACT_ABORT, NOCOUNT ON;
+	SET DATEFORMAT ymd;
+	
+	--DECLARE @NewsType NVARCHAR(50) = 'Bulletin'
+
+	DROP TABLE IF EXISTS #News
+	SELECT
+		NewsID = N.news_id,
+		CategoryID = N.category,
+		TypeID = n.type,
+		TypeSort = 
+			CASE
+				WHEN n.category = 4 AND n.type = 5 THEN 1
+				ELSE 2
+			END,
+		Title = N.title,
+		DisplayFromDate = N.display_from,
+		DisplayToDate = N.display_to,
+		IntroText = N.intro,
+		MainText = N.text_body_1,
+		NewsType = I.name,
+		NewsClass = I.class_name,
+		IconID = N.icon_id,
+		IconPath = 'https://staff.wlc.ac.uk/staff_portal/' + I.path,
+		NumComments = COALESCE ( COM.NumComments, 0 ),
+		NumViews = COALESCE ( COU.NumDistinctViews, 0 ),
+		ArticleLink = 'https://staff.wlc.ac.uk/staff_portal/news/article.asp?newsID=' + CAST ( N.news_id AS VARCHAR(10) ) + '&news_type=' + CAST ( N.category AS VARCHAR(10) ) + '&cs_id=&title=' + REPLACE ( N.title, ' ', '%20' ),
+		CreatedDate = N.date_created,
+		CreatedBy = N.user_created_by,
+		CreatedBySurname = SU.Surname,
+		CreatedByForename = SU.FirstNames,
+		CreatedByName =
+			CASE
+				WHEN SU.FirstNames + ' ' + SU.Surname IS NULL THEN ( N.user_created_by COLLATE DATABASE_DEFAULT )
+				ELSE ( SU.FirstNames + ' ' + SU.Surname COLLATE DATABASE_DEFAULT )
+			END,
+		CreatedByEmail = SU.EmailAddress
+		INTO #News
+	FROM activa.www_lookups.dbo.news_v2_tbl N
+	LEFT JOIN activa.www_lookups.dbo.icons_tbl I
+		ON I.icon_id = N.icon_id
+	LEFT JOIN activa.centime3.dbo.oo_sections_tbl SEC
+		ON SEC.cs_id = N.cs_id
+	LEFT JOIN (
+		SELECT
+			NewsID = C.news_news_id,
+			NumComments = COUNT ( C.news_id )
+		FROM activa.www_lookups.dbo.news_tbl C
+		WHERE
+			C.news_status = 'L'
+		GROUP BY
+			C.news_news_id
+	) COM
+		ON COM.NewsID = N.news_id
+	LEFT JOIN (
+		SELECT
+			NewsID = COU.n_news_id,
+			NumDistinctViews = COUNT ( DISTINCT COU.logon_user )
+		FROM activa.staff_intranet_store.dbo.zpage_counter_tbl COU
+		WHERE
+			COU.url = '/staff_portal/news/article.asp'
+		GROUP BY
+			COU.n_news_id
+	) COU
+		ON COU.NewsID = N.news_id
+	LEFT JOIN FIFI1.ProSolution.dbo._CCC_SystemUser SU
+		ON SU.UserName = N.user_created_by COLLATE DATABASE_DEFAULT
+	WHERE
+		N.category <> 3
+		--N.status = 'L'
+		--AND N.type IN ( 5, 16 )
+		--AND N.format = 1
+		AND CAST ( COALESCE ( N.display_from, GETDATE() ) AS DATE ) <= CAST ( GETDATE() AS DATE )
+		AND
+			CASE
+				WHEN n.category = 4 AND n.type = 5 THEN
+				CASE
+					WHEN CAST ( COALESCE ( N.display_to, GETDATE() ) AS DATE ) >= CAST ( GETDATE() AS DATE ) THEN 1
+					ELSE 0
+				END
+				ELSE 1
+			END = 1
+		--AND N.news_id = 6587
+		AND 
+			CASE
+				WHEN @NewsType = 'Bulletin' THEN 
+					CASE
+						WHEN n.type IN ( 5, 13, 15, 16, 1 ) THEN 1
+						ELSE 0
+					END
+				WHEN @NewsType = 'CEO' THEN 
+					CASE
+						WHEN n.type = 16 THEN 1
+						ELSE 0
+					END
+				ELSE 
+					CASE
+						WHEN n.type IN ( 5, 13, 15, 16, 1 ) THEN 1
+						ELSE 0
+					END
+			END = 1
+	
+	IF @NewsType = 'Bulletin'
+	BEGIN
+		SELECT TOP 18 *
+		FROM #News N
+		ORDER BY
+			N.TypeSort,
+			N.DisplayFromDate DESC,
+			N.Title
+	END
+	ELSE IF @NewsType = 'CEO'
+	BEGIN
+		SELECT TOP 15 *
+		FROM #News N
+		ORDER BY
+			N.TypeSort,
+			N.DisplayFromDate DESC,
+			N.Title
+	END
+	ELSE
+	BEGIN
+		SELECT TOP 18 *
+		FROM #News N
+		ORDER BY
+			N.TypeSort,
+			N.DisplayFromDate DESC,
+			N.Title
+	END
+	
+END

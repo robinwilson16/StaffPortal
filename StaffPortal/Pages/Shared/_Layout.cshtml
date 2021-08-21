@@ -1,0 +1,122 @@
+﻿@using StaffPortal.Models
+@using Microsoft.Extensions.Options
+@using StaffPortal.Shared
+
+@inject StaffPortal.Data.ApplicationDbContext _context
+@inject IOptions<SystemSettings> ApplicationSettings
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StaffPortal</title>
+    <link rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/ekko-lightbox/ekko-lightbox.css" asp-append-version="true">
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-xl navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-page="/Index">
+                <img class="NavLogo" src="~/images/WestLondonCollegeLogo.png" alt="West London College" />
+                <i class="fas fa-search"></i><div class="d-inline d-xl-none"> WLC Staff Portal</div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#NavbarMenu" aria-controls="NavbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-xl-inline-flex flex-xl-row-reverse" id="NavbarMenu">
+                <p class="nav navbar-text navbar-right">@ApplicationSettings.Value.Greeting,&nbsp;<i class="fas fa-user"></i>&nbsp;@await Identity.GetFullName(null, @User.Identity.Name.Split('\\').Last(), _context)</p>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="~/"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/StaffSearch" target="_blank" rel="noopener"><i class="fas fa-address-book"></i> Staff Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://staff.wlc.ac.uk/staff_portal/support/emailapps.asp" target="_blank" rel="noopener"><i class="fab fa-google"></i> Gmail</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="SystemsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-cog"></i> Systems
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="SystemsDropdown">
+                            <li><a class="dropdown-item" href="https://ProSolution.wlc.ac.uk/ProSolution" target="_blank" rel="noopener"><i class="fas fa-address-card"></i> ProSolution</a></li>
+                            <li><a class="dropdown-item" href="https://promonitor.wlc.ac.uk/ProMonitor" target="_blank" rel="noopener"><i class="fas fa-user-graduate"></i> ProMonitor</a></li>
+                            <li><a class="dropdown-item" href="http://ProResource.wlc.ac.uk/ProResource" target="_blank" rel="noopener"><i class="fas fa-clipboard-list"></i> ProResource</a></li>
+                            <li><a class="dropdown-item" href="https://ProObserve.wlc.ac.uk/ProObserve" target="_blank" rel="noopener"><i class="fas fa-binoculars"></i> ProObserve</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="~/Systems" target="_blank" rel="noopener"><i class="fas fa-question-circle"></i> More Systems and Information...</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://staff.wlc.ac.uk/staff_portal/a-z" target="_blank" rel="noopener"><i class="fas fa-list"></i> A - Z</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://sites.google.com/wlc.ac.uk/letstalktla/main-menu" target="_blank" rel="noopener"><i class="fas fa-comments"></i> Let's Talk TLA!</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://sites.google.com/wlc.ac.uk/wideropening/home" target="_blank" rel="noopener"><i class="fas fa-comments"></i> Wider College Reopening</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://sites.google.com/wlc.ac.uk/wideropening/home" target="_blank" rel="noopener"><i class="fas fa-university"></i> wlc.ac.uk</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="HelpDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-question-circle"></i> Help
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="HelpDropdown">
+                            <li><a class="dropdown-item" href="mailto:it@wlc.ac.uk" target="_blank" rel="noopener"><i class="fas fa-desktop"></i> Contact IT</a></li>
+                            <li><a class="dropdown-item" href="mailto:mis@wlc.ac.uk" target="_blank" rel="noopener"><i class="fas fa-chart-line"></i> Contact MIS</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="AboutSystemLink"><i class="fas fa-question-circle"></i> About</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="body-content">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="fixed-bottom bg-light">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <span class="text-muted">
+                        <i class="far fa-copyright"></i> 2021 West London College
+                    </span>
+                </div>
+                <div class="col text-end">
+                    <span class="text-muted">Staff Portal @ApplicationSettings.Value.Version</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    <script src="~/lib/momentjs/moment-with-locales.min.js" asp-append-version="true"></script>
+    <script src="~/lib/marked/marked.min.js" asp-append-version="true"></script>
+    <script src="~/lib/ekko-lightbox/ekko-lightbox.min.js" asp-append-version="true"></script>
+    <script src="~/lib/ScrollMagic/ScrollMagic.min.js" asp-append-version="true"></script>
+
+    <environment include="Development">
+        <script src="~/lib/ScrollMagic/plugins/debug.addIndicators.js" asp-append-version="true"></script>
+    </environment>
+
+    <script src="~/js/modals.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

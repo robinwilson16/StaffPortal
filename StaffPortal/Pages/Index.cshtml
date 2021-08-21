@@ -1,0 +1,600 @@
+﻿@page
+@model IndexModel
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-8 my-auto">
+            <h2>
+                <i class="fas fa-search"></i> Staff Portal
+            </h2>
+        </div>
+        <div class="col-md-4 text-center my-auto">
+            <a href="https://www.wlc.ac.uk" title="WLC Homepage" target="_blank" rel="noopener">
+                <img src="/images/CollegeLogo.png" class="img-fluid CollegeLogoPageTop" alt="West London College Logo" />
+            </a>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md">
+                    <h3><i class="fas fa-bullhorn"></i> College News</h3>
+                    <div class="bd-callout bd-callout-info">
+                        <ul class="nav nav-tabs" id="CollegeNewsTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="CollegeNewsBulletinTab" data-bs-toggle="tab" data-bs-target="#CollegeNewsBulletinContent" type="button" role="tab" aria-controls="CollegeNewsBulletinContent" aria-selected="true"><i class="fas fa-newspaper"></i> Bulletin</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="CollegeNewsVacanciesTab" data-bs-toggle="tab" data-bs-target="#CollegeNewsVacanciesContent" type="button" role="tab" aria-controls="CollegeNewsVacanciesContent" aria-selected="false"><i class="fas fa-user-check"></i> Vacancies</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="CollegeNewsCEOTab" data-bs-toggle="tab" data-bs-target="#CollegeNewsCEOContent" type="button" role="tab" aria-controls="CollegeNewsCEOContent" aria-selected="false"><i class="fas fa-user-tie"></i> CEO/Principal</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="CollegeNewsTabsContent">
+                            <div class="tab-pane fade show active" id="CollegeNewsBulletinContent" role="tabpanel" aria-labelledby="CollegeNewsBulletinTab">
+                                <div class="DataLoading">
+                                    <h1><i class="fas fa-spinner fa-spin"></i></h1>
+                                </div>
+                                <div class="alert alert-primary" role="alert">
+                                    <i class="fas fa-info-circle"></i> Find more in the <a href="http://staff.wlc.ac.uk/staff_portal/news/archive.asp" title="News Archive" target="_blank" rel="noopener"><i class="fas fa-archive"></i> News Archive</a>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="CollegeNewsVacanciesContent" role="tabpanel" aria-labelledby="CollegeNewsVacanciesTab">
+                                <div class="container">
+                                    <div class="row mt-3">
+                                        <div class="col-md">
+                                            <div class="card text-center pt-3">
+                                                <a href="https://ce0151li.webitrent.com/ce0151li_web/wrd/run/ETREC105GF.open?WVID=3332890DDx" title="Internal Vacancies" target="_blank" rel="noopener"><h1><i class="fas fa-school"></i></h1></a>
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><a href="https://ce0151li.webitrent.com/ce0151li_web/wrd/run/ETREC105GF.open?WVID=3332890DDx" title="Internal Vacancies" target="_blank" rel="noopener">Internal Vacancies</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md">
+                                            <div class="card text-center pt-3">
+                                                <a href="https://ce0151li.webitrent.com/ce0151li_web/wrd/run/ETREC105GF.open?WVID=27327905cM" title="External Vacancies" target="_blank" rel="noopener"><h1><i class="fas fa-external-link-alt"></i></h1></a>
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><a href="https://ce0151li.webitrent.com/ce0151li_web/wrd/run/ETREC105GF.open?WVID=27327905cM" title="External Vacancies" target="_blank" rel="noopener">External Vacancies</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="CollegeNewsCEOContent" role="tabpanel" aria-labelledby="CollegeNewsCEOTab">
+                                <div class="DataLoading">
+                                    <h1><i class="fas fa-spinner fa-spin"></i></h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md">
+                    <h3><i class="far fa-calendar-alt"></i> College Calendar</h3>
+                    <div class="bd-callout bd-callout-info">
+                        <ul class="nav nav-tabs" id="CollegeCalendarTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="CollegeCalendarCalendarTab" data-bs-toggle="tab" data-bs-target="#CollegeCalendarCalendarContent" type="button" role="tab" aria-controls="CollegeCalendarCalendarContent" aria-selected="true"><i class="fas fa-calendar-alt"></i> Cross College Calendar</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="CollegeCalendarDutyRotaTab" data-bs-toggle="tab" data-bs-target="#CollegeCalendarDutyRotaContent" type="button" role="tab" aria-controls="CollegeCalendarDutyRotaContent" aria-selected="false"><i class="fas fa-users"></i> Duty Rota</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="CollegeCalendarTabsContent">
+                            <div class="tab-pane fade show active" id="CollegeCalendarCalendarContent" role="tabpanel" aria-labelledby="CollegeCalendarCalendarTab">
+                                <iframe src="https://calendar.google.com/calendar/u/1/embed?showTitle=0&showPrint=0&mode=AGENDA&height=400&wkst=2&bgcolor=%23FFFFFF&src=events@gspace.wlc.ac.uk&color=%23182C57&src=gspace.wlc.ac.uk_20174nkf06sassgr43cbecnc84@group.calendar.google.com&color=%238D6F47&src=gspace.wlc.ac.uk_mer8qgg1d81m5pi5rg1k6ohotg@group.calendar.google.com&color=%23AB8B00&src=gspace.wlc.ac.uk_j5dlf7h1gt33vjhcsuv000ftjk@group.calendar.google.com&color=%23125A12&%3C!--src=gspace.wlc.ac.uk_pl5cadih3buoogr0mrnf8immp8@group.calendar.google.com&color=%23711616&--%3Esrc=gspace.wlc.ac.uk_n1pqin9s4teuscedpn5qr3k5u0@group.calendar.google.com&color=%2323164E&src=gspace.wlc.ac.uk_k8u9s5upn4s8cvrd2nam3ifkrc@group.calendar.google.com&color=%238D6F47&ctz=Europe/London" class="w-100 Iframe">
+                                </iframe>
+                            </div>
+                            <div class="tab-pane fade" id="CollegeCalendarDutyRotaContent" role="tabpanel" aria-labelledby="CollegeCalendarDutyRotaTab">
+                                <iframe src="https://calendar.google.com/calendar/u/1/embed?src=dutyrota@wlc.ac.uk&ctz=Europe/London" class="w-100 Iframe">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md">
+                    <h3><i class="fas fa-info-circle"></i> Resources &amp; Information</h3>
+                    <div class="bd-callout bd-callout-warning">
+                        <ul class="nav nav-tabs" id="ResourcesTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="ResourcesDataTab" data-bs-toggle="tab" data-bs-target="#ResourcesDataContent" type="button" role="tab" aria-controls="ResourcesDataContent" aria-selected="true"><i class="fas fa-chart-pie"></i></button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="ResourcesSafeguardingTab" data-bs-toggle="tab" data-bs-target="#ResourcesSafeguardingContent" type="button" role="tab" aria-controls="ResourcesSafeguardingContent" aria-selected="false"><i class="fas fa-hands-helping"></i> 2222</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="ResourcesHelpdeskTab" data-bs-toggle="tab" data-bs-target="#ResourcesHelpdeskContent" type="button" role="tab" aria-controls="ResourcesHelpdeskContent" aria-selected="false"><i class="fas fa-question-circle"></i></button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="ResourcesReportingTab" data-bs-toggle="tab" data-bs-target="#ResourcesReportingContent" type="button" role="tab" aria-controls="ResourcesReportingContent" aria-selected="false"><i class="fas fa-cog"></i> Reporting</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="CollegeNewsTabsContent">
+                            <div class="tab-pane fade show active" id="ResourcesDataContent" role="tabpanel" aria-labelledby="ResourcesDataTab">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Reporting</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a href="https://staff.wlc.ac.uk/staff_portal/reports/reportslinks.asp&title=Reports%20pandq" title="MI Portal" target="_blank" rel="noopener">
+                                                    <i class="fas fa-chevron-circle-right"></i> MI Portal
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="http://wlcba-pobi001a/Reports/powerbi/Dashboards/West%20London%20College%20Dashboard?rs:embed=true" title="Dashboards" target="_blank" rel="noopener">
+                                                    <i class="fas fa-chevron-circle-right"></i> Dashboards
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="alert alert-primary" role="alert">
+                                    <i class="fas fa-info-circle"></i> The old reports portal and Proachieve Web are still available via the Systems link.
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="ResourcesSafeguardingContent" role="tabpanel" aria-labelledby="ResourcesSafeguardingTab">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Safeguarding</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a href="https://sites.google.com/wlc.ac.uk/safeguardingandprevent/" title="Safeguarding and Prevent Site" target="_blank" rel="noopener">
+                                                    <i class="fas fa-chevron-circle-right"></i> Safeguarding and Prevent Site
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="ResourcesHelpdeskContent" role="tabpanel" aria-labelledby="ResourcesHelpdeskTab">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">College Helpdesks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a href="https://wlcservicedesk.topdesk.net/tas/public/login/form" title="Estates Helpdesk" target="_blank" rel="noopener">
+                                                    <i class="fas fa-chevron-circle-right"></i> Estates
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="https://wlcservicedesk.topdesk.net/tas/public/login/form" title="IT Services Helpdesk" target="_blank" rel="noopener">
+                                                    <i class="fas fa-chevron-circle-right"></i> IT Services
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="https://wlcservicedesk.topdesk.net/" title="Reporting Services and Systems Integration Helpdesk" target="_blank" rel="noopener">
+                                                    <i class="fas fa-chevron-circle-right"></i> Reporting Services and Systems Integration
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="ResourcesReportingContent" role="tabpanel" aria-labelledby="ResourcesReportingTab">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Reporting</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a href="https://ce0151li.webitrent.com/ce0151li_ess/ess/#/login&title=Employee%20Self%20Service" title="Employee Self-service" target="_blank" rel="noopener">
+                                                    <i class="fas fa-chevron-circle-right"></i> Employee Self-Service
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="https://ce0151li.webitrent.com/ce0151li_web" title="Manager Self-Service" target="_blank" rel="noopener">
+                                                    <i class="fas fa-chevron-circle-right"></i> Manager Self-Service
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="http://dasha.wlc.ac.uk&title=Dynistics%20Dashboard" title="Active Dashboards" target="_blank" rel="noopener">
+                                                    <i class="fas fa-chevron-circle-right"></i> Active Dashboards
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="https://staff.wlc.ac.uk/staff_portal/reports/reportslinks.asp&title=Reports%20pandq" title="MI Portal" target="_blank" rel="noopener">
+                                                    <i class="fas fa-chevron-circle-right"></i> MI Portal
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Support and Training</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a href="https://staff.wlc.ac.uk/staff_portal/support/videos.asp" title="Systems Made Simple Video Guides" target="_blank" rel="noopener">
+                                                    <i class="fas fa-chevron-circle-right"></i> Systems Made Simple Video Guides
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <h5><i class="fas fa-virus"></i> COVID-19 Information for Staff</h5>
+                    <a href="https://sites.google.com/wlc.ac.uk/wideropening/home" title="COVID-19 Information for Staff" target="_blank" rel="noopener">
+                        <img src="~/images/COVID.png" class="img-fluid RoundedImage" title="COVID Information for Staff" />
+                    </a>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md">
+                    <div id="CarouselHome1" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#CarouselHome1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#CarouselHome1" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#CarouselHome1" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            <button type="button" data-bs-target="#CarouselHome1" data-bs-slide-to="3" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a href="https://staff.wlc.ac.uk/staff_portal/news/article.asp?newsID=4937&title=New%20Sickness%20Reporting%20Process" title="24/7 Absence Reporting" target="_blank" rel="noopener">
+                                    <img src="~/images/CarouselHome/AbsenceReporting.png" class="d-block w-100 RoundedImage" alt="24/7 Absence Reporting">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="https://staff.wlc.ac.uk/staff_portal/news/article.asp?newsID=4429" title="Smoke Free Campus" target="_blank" rel="noopener">
+                                    <img src="~/images/CarouselHome/SmokeFreeCampus.jpg" class="d-block w-100 RoundedImage" alt="Smoke Free Campus">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="https://sites.google.com/a/gspace.wlc.ac.uk/health-and-safety/" title="Health and Safety" target="_blank" rel="noopener">
+                                    <img src="~/images/CarouselHome/HealthAndSafety.jpg" class="d-block w-100 RoundedImage" alt="Health and Safety">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="https://ce0151li.webitrent.com/ce0151li_ess/ess/#/login" title="Employee Self-Service" target="_blank" rel="noopener">
+                                    <img src="~/images/CarouselHome/EmployeeSelfService.jpg" class="d-block w-100 RoundedImage" alt="Employee Self-Service">
+                                </a>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#CarouselHome1" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#CarouselHome1" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md">
+                    <div class="alert alert-warning" role="alert">
+                        <h4 class="alert-heading">Passenger Lifts</h4>
+                        <a href="https://docs.google.com/a/gspace.wlc.ac.uk/spreadsheets/d/1ioSNTyu3x50MzSRPohS5gYUqeJ-fWgCeqPZRBcky_s8/edit?usp=sharing" title="Passenger Lifts Status" target="_blank" rel="noopener">Click here</a> to check the current status of the passenger lifts.
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md">
+                    <div class="bd-callout bd-callout-warning">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Toolkits</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a href="https://staff.wlc.ac.uk/staff_portal/leadership/managers/index.asp" title="Managers' Toolkit" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Managers
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://sites.google.com/gspace.wlc.ac.uk/quality-improvement/teachers-toolkit?authuser=0" title="Teachers' Toolkit" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Teachers
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md">
+                    <div class="bd-callout bd-callout-warning">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Leadership</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a href="~/Governors" title="Governors">
+                                            <i class="fas fa-chevron-circle-right"></i> Governors
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md">
+                    <div class="bd-callout bd-callout-warning">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Key Services and Information for Staff</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a href="~/Admissions" title="Admissions">
+                                            <i class="fas fa-chevron-circle-right"></i> Admissions
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="~/ALS" title="ALS">
+                                            <i class="fas fa-chevron-circle-right"></i> ALS
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="~/Canteen" title="Canteen">
+                                            <i class="fas fa-chevron-circle-right"></i> Canteen
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="~/ChangeManagement" title="Change Management">
+                                            <i class="fas fa-chevron-circle-right"></i> Change Management
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://sites.google.com/wlc.ac.uk/enrolment" title="Enrolment" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Enrolment
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="~/EqualityAndDiversity" title="Equality and Diversity">
+                                            <i class="fas fa-chevron-circle-right"></i> Equality and Diversity
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://sites.google.com/wlc.ac.uk/estates" title="Estates" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Estates
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="~/EvolveLearningGroup" title="Evolve Learning Group">
+                                            <i class="fas fa-chevron-circle-right"></i> Evolve Learning Group
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="~/ExecutiveSupportAndAdministration" title="Executive Support and Administration">
+                                            <i class="fas fa-chevron-circle-right"></i> Executive Support and Administration
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="~/Finance" title="Finance" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Finance
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="~/HealthAndSafety" title="Health and Safety" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Health and Safety
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="~/HealthAndSafetyCommittees" title="Health and Safety Committees" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Health and Safety Committees
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=19&area=services&title=Human%20Resources" title="Human Resources" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Human Resources
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://sites.google.com/wlc.ac.uk/wlc-student-induction-tutorial/home" title="Induction and Tutorial" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Induction and Tutorial
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=85&area=services&title=Information%20Systems" title="Information Systems" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Information Systems
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=24&area=services&title=IT%20Services" title="IT Services" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> IT Services
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=25&area=services&title=Learning%20Centre" title="Learning Centre" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Learning Centre
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=129&area=services&title=Learning%20Technologies%20and%20User%20Experience%20Design" title="Learning Technologies and User Experience Design" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Learning Technologies and User Experience Design
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=27&area=services&title=Marketing" title="Marketing" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Marketing
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=20&area=services&title=Nursery" title="Nursery" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Nursery
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=323&area=services&title=Quality" title="Quality" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Quality
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=26&area=services&title=Registry%20and%20Exams" title="Registry and Exams" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Registry and Exams
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=87&area=services&title=Reprographics" title="Reprographics" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Reprographics
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://sites.google.com/wlc.ac.uk/safeguardingandprevent/" title="Safeguarding and Prevent" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Safeguarding and Prevent
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=128&area=services&title=Security" title="Security" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Security
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=18&area=services&title=Student%20Engagement%20and%20Experience" title="Student Engagement and Experience" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Student Engagement and Experience
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=22&area=services&title=Student%20Services" title="Student Services" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Student Services
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=137&area=services&title=Unions" title="Unions" target="_blank" rel="noopener">
+                                            <i class="fas fa-chevron-circle-right"></i> Unions
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<partial name="_HomeModalsPartial" model="Model" />
+
+<!-- Hidden Inputs -->
+<input id="AntiForgeryTokenID" name="__RequestVerificationToken" type="hidden" value=" @Xsrf.GetAndStoreTokens(this.HttpContext).RequestToken" />
+<partial name="_HomeHiddenInputsPartial" model="Model" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_HomeScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
