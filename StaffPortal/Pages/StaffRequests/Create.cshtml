@@ -11,88 +11,121 @@
 <hr />
 <div class="container">
     <div class="row">
-        <div class="col-md" id="StaffRequestForm">
-            <form method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="row mb-3">
-                    <label asp-for="StaffRequest.Surname" class="col-sm-6 col-form-label"></label>
-                    <div class="col-sm-6">
-                        <input asp-for="StaffRequest.Surname" class="form-control" />
+
+        @if (Model.IsSubmitted == false || (Model.IsSubmitted == true && Model.RequestSuccessful == false))
+        {
+            @if (Model.IsSubmitted == true && Model.RequestSuccessful == false)
+            {
+                <div class="row">
+                    <div class="col-md">
+                        <div class="alert alert-danger" role="alert">
+                            <h4 class="alert-heading"><i class="fas fa-bug"></i> Error Occurred</h4>
+                            <p>Sorry, an error occurred attempting to send your request to HR</p>
+                            <p>Please try again and if the error persists please contact IT Services</p>
+                            <p>The error was @Model.ErrorMessage</p>
+                        </div>
                     </div>
-                    <span asp-validation-for="StaffRequest.Surname" class="text-danger"></span>
                 </div>
-                <div class="row mb-3">
-                    <label asp-for="StaffRequest.Forename" class="col-sm-6 col-form-label"></label>
-                    <div class="col-sm-6">
-                        <input asp-for="StaffRequest.Forename" class="form-control" />
-                    </div>
-                    <span asp-validation-for="StaffRequest.Forename" class="text-danger"></span>
+            }
+
+            <div class="row">
+                <div class="col-md" id="StaffRequestForm">
+                    <form method="post" id="StaffRequestFormData">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row mb-3">
+                            <label asp-for="StaffRequest.Forename" class="col-sm-6 col-form-label"></label>
+                            <div class="col-sm-6">
+                                <input asp-for="StaffRequest.Forename" class="form-control" />
+                            </div>
+                            <span asp-validation-for="StaffRequest.Forename" class="text-danger"></span>
+                        </div>
+                        <div class="row mb-3">
+                            <label asp-for="StaffRequest.Surname" class="col-sm-6 col-form-label"></label>
+                            <div class="col-sm-6">
+                                <input asp-for="StaffRequest.Surname" class="form-control" />
+                            </div>
+                            <span asp-validation-for="StaffRequest.Surname" class="text-danger"></span>
+                        </div>
+                        <div class="row mb-3">
+                            <label asp-for="StaffRequest.RoomNumber" class="col-sm-6 col-form-label"></label>
+                            <div class="col-sm-6">
+                                <input asp-for="StaffRequest.RoomNumber" class="form-control" list="RoomNumberOptions" />
+                                <datalist id="RoomNumberOptions">
+                                    @if (ViewBag.RoomID != null)
+                                    {
+                                        @foreach (var item in ViewBag.RoomID)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    }
+                                </datalist>
+                            </div>
+                            <span asp-validation-for="StaffRequest.RoomNumber" class="text-danger"></span>
+                        </div>
+                        <div class="row mb-3">
+                            <label asp-for="StaffRequest.Campus" class="col-sm-6 col-form-label"></label>
+                            <div class="col-sm-6">
+                                <select asp-for="StaffRequest.Campus" class="form-select" asp-items="ViewBag.CampusID">
+                                    <option value="" hidden disabled selected>Please select...</option>
+                                </select>
+                            </div>
+                            <span asp-validation-for="StaffRequest.Campus" class="text-danger"></span>
+                        </div>
+                        <div class="row mb-3">
+                            <label asp-for="StaffRequest.Department" class="col-sm-6 col-form-label"></label>
+                            <div class="col-sm-6">
+                                <select asp-for="StaffRequest.Department" class="form-select" asp-items="ViewBag.TeamID">
+                                    <option value="" hidden disabled selected>Please select...</option>
+                                </select>
+                            </div>
+                            <span asp-validation-for="StaffRequest.Department" class="text-danger"></span>
+                        </div>
+                        <div class="row mb-3">
+                            <label asp-for="StaffRequest.EmployeeType" class="col-sm-6 col-form-label"></label>
+                            <div class="col-sm-6">
+                                <select asp-for="StaffRequest.EmployeeType" class="form-select" asp-items="ViewBag.EmployeeTypeID">
+                                    <option value="" hidden disabled selected>Please select...</option>
+                                </select>
+                            </div>
+                            <span asp-validation-for="StaffRequest.EmployeeType" class="text-danger"></span>
+                        </div>
+                        <div class="row mb-3">
+                            <label asp-for="StaffRequest.AgencyName" class="col-sm-6 col-form-label"></label>
+                            <div class="col-sm-6">
+                                <input asp-for="StaffRequest.AgencyName" class="form-control" />
+                            </div>
+                            <span asp-validation-for="StaffRequest.AgencyName" class="text-danger"></span>
+                        </div>
+                        <div class="row mb-3">
+                            <label asp-for="StaffRequest.PhoneExtension" class="col-sm-6 col-form-label"></label>
+                            <div class="col-sm-6">
+                                <input asp-for="StaffRequest.PhoneExtension" class="form-control" />
+                            </div>
+                            <span asp-validation-for="StaffRequest.PhoneExtension" class="text-danger"></span>
+                        </div>
+                        <div class="row mb-3">
+                            <label asp-for="StaffRequest.JobTitle" class="col-sm-6 col-form-label"></label>
+                            <div class="col-sm-6">
+                                <input asp-for="StaffRequest.JobTitle" class="form-control" />
+                            </div>
+                            <span asp-validation-for="StaffRequest.JobTitle" class="text-danger"></span>
+                        </div>
+                        @*<div class="row mb-3">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>*@
+                    </form>
                 </div>
-                <div class="row mb-3">
-                    <label asp-for="StaffRequest.RoomNumber" class="col-sm-6 col-form-label"></label>
-                    <div class="col-sm-6">
-                        <input asp-for="StaffRequest.RoomNumber" class="form-control" list="RoomNumberOptions" />
-                        <datalist id="RoomNumberOptions">
-                            @foreach (var item in ViewBag.RoomID) {
-                            <option value="@item.Value">@item.Text</option>
-                            }
-                        </datalist>
-                    </div>
-                    <span asp-validation-for="StaffRequest.RoomNumber" class="text-danger"></span>
+            </div>
+        }
+        else
+        {
+            <div class="col-md">
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading"><i class="fas fa-bug"></i> Request Submitted to HR</h4>
+                    <p>Thanks, your request has been successfully submitted to HR.</p>
                 </div>
-                <div class="row mb-3">
-                    <label asp-for="StaffRequest.Campus" class="col-sm-6 col-form-label"></label>
-                    <div class="col-sm-6">
-                        <select asp-for="StaffRequest.Campus" class="form-select" asp-items="ViewBag.CampusID">
-                            <option value="" hidden disabled selected>Please select...</option>
-                        </select>
-                    </div>
-                    <span asp-validation-for="StaffRequest.Campus" class="text-danger"></span>
-                </div>
-                <div class="row mb-3">
-                    <label asp-for="StaffRequest.Department" class="col-sm-6 col-form-label"></label>
-                    <div class="col-sm-6">
-                        <select asp-for="StaffRequest.Department" class="form-select" asp-items="ViewBag.TeamID">
-                            <option value="" hidden disabled selected>Please select...</option>
-                        </select>
-                    </div>
-                    <span asp-validation-for="StaffRequest.Department" class="text-danger"></span>
-                </div>
-                <div class="row mb-3">
-                    <label asp-for="StaffRequest.EmployeeType" class="col-sm-6 col-form-label"></label>
-                    <div class="col-sm-6">
-                        <select asp-for="StaffRequest.EmployeeType" class="form-select" asp-items="ViewBag.EmployeeTypeID">
-                            <option value="" hidden disabled selected>Please select...</option>
-                        </select>
-                    </div>
-                    <span asp-validation-for="StaffRequest.EmployeeType" class="text-danger"></span>
-                </div>
-                <div class="row mb-3">
-                    <label asp-for="StaffRequest.AgencyName" class="col-sm-6 col-form-label"></label>
-                    <div class="col-sm-6">
-                        <input asp-for="StaffRequest.AgencyName" class="form-control" />
-                    </div>
-                    <span asp-validation-for="StaffRequest.AgencyName" class="text-danger"></span>
-                </div>
-                <div class="row mb-3">
-                    <label asp-for="StaffRequest.PhoneExtension" class="col-sm-6 col-form-label"></label>
-                    <div class="col-sm-6">
-                        <input asp-for="StaffRequest.PhoneExtension" class="form-control" />
-                    </div>
-                    <span asp-validation-for="StaffRequest.PhoneExtension" class="text-danger"></span>
-                </div>
-                <div class="row mb-3">
-                    <label asp-for="StaffRequest.JobTitle" class="col-sm-6 col-form-label"></label>
-                    <div class="col-sm-6">
-                        <input asp-for="StaffRequest.JobTitle" class="form-control" />
-                    </div>
-                    <span asp-validation-for="StaffRequest.JobTitle" class="text-danger"></span>
-                </div>
-                @*<div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>*@
-            </form>
-        </div>
+            </div>
+        }
     </div>
 
     <div>

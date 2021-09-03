@@ -99,11 +99,20 @@ function loadList(objectTypeID, listID, parentID, childID, rootPath) {
 
     dataToLoad += `?handler=Json`;
 
-    let listData = $("#" + listID).DataTable();
+    let list = $("#" + listID);
 
-    listData.ajax.url(dataToLoad).load(null, false);
+    if (list.length === 0) {
+        let title = `Error Loading data from the list ${listID}`;
+        let content = `The list ${listID} could not be processed. Please try again.`;
 
-    console.log(objectTypeID + " from " + dataToLoad + " Loaded");
+        doErrorModal(title, content);
+    }
+    else {
+        let listData = list.DataTable();
+
+        listData.ajax.url(dataToLoad).load(null, false);
+        console.log(objectTypeID + " from " + dataToLoad + " Loaded");
+    }
 }
 
 function showAlerts(objectTypeID, objectID, rootPath) {
@@ -143,93 +152,105 @@ function showAlerts(objectTypeID, objectID, rootPath) {
 }
 
 function attachFormFunctions(objectID, objectIDField, objectTypeID, actionID, remoteElementID, loadIntoElementID, parentID, childID, rootPath, modalID, formID, listID, buttonClass, closeModalOnSuccess) {
-    var form = $("#" + formID);
-    form.removeData('validator');
-    form.removeData('unobtrusiveValidation');
-    $.validator.unobtrusive.parse(form);
-    
-    $("#" + modalID).find(".ActionButton").data("id", objectID);
+    let form = $("#" + formID);
+    if (form.length === 0) {
+        $("#" + modalID).modal("hide");
 
-    extraFormFunctions();
+        let title = `Error Loading data from the form ${formID}`;
+        let content = `The form ${formID} could not be processed. Please try again.`;
 
-    form.submit(function (event) {
-        event.preventDefault();
+        doErrorModal(title, content);
+    }
+    else {
+        form.removeData('validator');
+        form.removeData('unobtrusiveValidation');
+        $.validator.unobtrusive.parse(form);
 
-        //If existing item then update
-        let mode = null;
-        let submitLocation = null;
-        //If object ID is found then need to edit
-        if (objectID && objectID !== "0") {
-            mode = "EDIT"
-            if (parentID) {
-                submitLocation = `${rootPath}/${objectTypeID}/${actionID}/${parentID}/${objectID}`;
+        $("#" + modalID).find(".ActionButton").data("id", objectID);
+
+        extraFormFunctions();
+
+        form.submit(function (event) {
+            event.preventDefault();
+
+            //If existing item then update
+            let mode = null;
+            let submitLocation = null;
+            //If object ID is found then need to edit
+            if (objectID && objectID !== "0") {
+                mode = "EDIT"
+                if (parentID) {
+                    submitLocation = `${rootPath}/${objectTypeID}/${actionID}/${parentID}/${objectID}`;
+                }
+                else {
+                    submitLocation = `${rootPath}/${objectTypeID}/${actionID}/${objectID}`;
+                }
+            }
+            else if (parentID) {
+                mode = "NEW"
+                submitLocation = `${rootPath}/${objectTypeID}/${actionID}/${parentID}`;
             }
             else {
-                submitLocation = `${rootPath}/${objectTypeID}/${actionID}/${objectID}`;
+                mode = "NEW"
+                submitLocation = `${rootPath}/${objectTypeID}/${actionID}`;
             }
-        }
-        else if (parentID) {
-            mode = "NEW"
-            submitLocation = `${rootPath}/${objectTypeID}/${actionID}/${parentID}`;
-        }
-        else {
-            mode = "NEW"
-            submitLocation = `${rootPath}/${objectTypeID}/${actionID}`;
-        }
 
-        if (childID) {
-            submitLocation += `/${childID}`;
-        }
+            if (childID) {
+                submitLocation += `/${childID}`;
+            }
 
-        //If no unobtrusive validation errors
-        if (form.valid()) {
-            let formData = new FormData(document.getElementById(formID));
-            $.ajax({
-                type: "POST",
-                url: submitLocation,
-                data: formData,
-                success: function (data) {
-                    let hasClosedModal = false;
-                    if (data.isSuccessful !== false) {
-                        if (closeModalOnSuccess === true && $("#CloseFormOnSubmit").val() === "Y") {
-                            hasClosedModal = true;
-                            $("#" + modalID).modal("hide");
-                        }
-                        console.log(`Data saved to ${submitLocation}`);
-                        let audio = new Audio("/sounds/confirm.wav");
-                        audio.play();
-                    }
-                    else {
-                        let title = `Error Saving Data`;
-
-                        if (data.errorLevel === 1) {
-                            doModal(title, data.errorDescription);
+            //If no unobtrusive validation errors
+            if (form.valid()) {
+                let formData = new FormData(document.getElementById(formID));
+                $.ajax({
+                    type: "POST",
+                    url: submitLocation,
+                    data: formData,
+                    success: function (data) {
+                        let hasClosedModal = false;
+                        if (data.isSuccessful !== false) {
+                            if (closeModalOnSuccess === true && $("#CloseFormOnSubmit").val() === "Y") {
+                                hasClosedModal = true;
+                                $("#" + modalID).modal("hide");
+                            }
+                            console.log(`Data saved to ${submitLocation}`);
+                            let audio = new Audio("/sounds/confirm.wav");
+                            audio.play();
                         }
                         else {
-                            doErrorModal(title, data.errorDescription);
+                            let title = `Error Saving Data`;
+
+                            if (data.errorLevel === 1) {
+                                doModal(title, data.errorDescription);
+                            }
+                            else {
+                                doErrorModal(title, data.errorDescription);
+                            }
                         }
-                    }
 
-                    //Now object created must switch to edit mode
-                    if (hasClosedModal === false && mode === "NEW") {
-                        $("#" + objectIDField).val(data.objectID);
-                        $("#" + modalID).trigger("shown.bs.modal");
-                    }
+                        //Now object created must switch to edit mode
+                        if (hasClosedModal === false && mode === "NEW") {
+                            $("#" + objectIDField).val(data.objectID);
+                            $("#" + modalID).trigger("shown.bs.modal");
+                        }
 
-                    loadList(objectTypeID, listID, parentID, childID, rootPath);
-                },
-                error: function (error) {
-                    let title = `Error Saving Data`;
-                    doCrashModal(title, error);
-                },
-                async: true,
-                cache: false,
-                contentType: false,
-                processData: false,
-                timeout: 60000
-            });
-        }
-    });
+                        if (listID !== null) {
+                            loadList(objectTypeID, listID, parentID, childID, rootPath);
+                        }
+                    },
+                    error: function (error) {
+                        let title = `Error Saving Data`;
+                        doCrashModal(title, error);
+                    },
+                    async: true,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    timeout: 60000
+                });
+            }
+        });
+    }
 }
 
 function performButtonAction(button) {

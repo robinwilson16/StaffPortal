@@ -3,6 +3,16 @@ attachListFunctions(
     "StaffRequestButton"
 );
 
+attachListFunctions(
+    "EditStaffSearchResultsItemButton"
+);
+
+//Action Buttons that save data
+$(".SaveStaffRequestButton").click(function (event) {
+    $("#StaffRequestFormData").submit();
+    performButtonAction(this);
+});
+
 //Load data in when model is displayed
 $("#ModalStaffRequest").on("shown.bs.modal", function () {
     let companyID = $("#CompanyID").val();
@@ -48,7 +58,7 @@ $("#ModalStaffRequest").on("shown.bs.modal", function () {
     childID = null;
     modalID = "ModalStaffRequest";
     formID = "StaffRequestFormData";
-    listID = "StaffRequestList";
+    listID = null;
     buttonClass = "StaffRequestButton";
     closeModalOnSuccess = true;
     loadForm(objectID, objectIDField, objectTypeID, actionID, remoteElementID, loadIntoElementID, parentID, childID, rootPath, modalID, formID, listID, buttonClass, closeModalOnSuccess);
@@ -90,27 +100,22 @@ async function getStaffSearchResults(searchQuery) {
 
     loadData("GET", dataToLoad)
         .then(data => {
-            //try {
+            try {
                 displayStaffSearchResults(data, searchQuery);
 
                 console.log(dataToLoad + " Loaded");
                 attachListFunctions(
                     "EditStaffSearchResultsItemButton"
                 );
-            //}
-            //catch (e) {
-            //    let title = `Error Loading Staff Search Results`;
-            //    let content = `The Staff Search Results could not be loaded`;
+            }
+            catch (e) {
+                let title = `Error Loading Staff Search Results`;
+                let content = `The Staff Search Results could not be loaded`;
 
-            //    doErrorModal(title, content);
-            //}
+                doErrorModal(title, content);
+            }
         });
 }
-
-//Buttons that load content
-attachListFunctions(
-    "EditStaffSearchResultsItemButton"
-);
 
 function displayStaffSearchResults(data, searchQuery) {
     let staffData = JSON.parse(data);

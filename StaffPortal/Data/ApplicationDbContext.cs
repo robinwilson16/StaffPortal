@@ -19,6 +19,7 @@ namespace StaffPortal.Data
         public IConfiguration configuration { get; }
 
         public DbSet<Config> Config { get; set; }
+        public DbSet<EmailSettings> EmailSettings { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<SelectListData> SelectListData { get; set; }
         public DbSet<StaffDetail> StaffDetail { get; set; }
@@ -33,6 +34,8 @@ namespace StaffPortal.Data
             
             modelBuilder.Entity<Config>()
                 .HasKey(c => new { c.AcademicYear });
+            modelBuilder.Entity<EmailSettings>()
+                .HasKey(c => new { c.Username });
             modelBuilder.Entity<SelectListData>()
                .HasKey(d => new { d.Code });
             modelBuilder.Entity<StaffMember>()
@@ -44,6 +47,9 @@ namespace StaffPortal.Data
             //Prevent creating table in EF Migration
             modelBuilder.Entity<Config>(entity => {
                 entity.ToView("Config", "dbo");
+            });
+            modelBuilder.Entity<EmailSettings>(entity => {
+                entity.ToView("EmailSettings", "dbo");
             });
             modelBuilder.Entity<News>(entity => {
                 entity.ToView("News", "dbo");

@@ -1,0 +1,205 @@
+﻿@page
+@model StaffPortal.Pages.MIPortalModel
+@{
+    ViewData["Title"] = "MI Portal";
+}
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-8 my-auto">
+            <h2>
+                <i class="fas fa-chart-bar"></i> MI Portal
+            </h2>
+        </div>
+        <div class="col-md-4 text-center my-auto">
+            <a href="https://www.wlc.ac.uk" title="WLC Homepage" target="_blank" rel="noopener">
+                <img src="/images/CollegeLogo.png" class="img-fluid CollegeLogoPageTop" alt="West London College Logo" />
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md">
+            <p>
+                A link to the key management reports produced by the Information Systems Team.
+            </p>
+            <p>
+                Please note that some of these reports are not available outside of the College, require a modern browser to run and are likely to timeout after a certain period.
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-8 mt-3">
+            <div class="row">
+                <div class="col-md">
+                    <h4>
+                        <i class="fas fa-users"></i> Enrolment
+                    </h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="http://wlcba-pobi001a/Reports/powerbi/Enrolment/Enrolment%202021-2022?rs:embed=true" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Enrolment Dashboard</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fEnrolment+2122%2fEnrolments+Actual+vs+Target&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Enrolment Numbers - Target vs Actual</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fEnrolment+2122%2fLearners+by+Campus+and+Enrolment+Invite+Date+2122&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Learners By Invite Date (Applications)</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fEnrolment+2122%2fLearners+Invited+by+Curriculum+Area_Campus_Enrolment+Invite+Date%c2%a02122&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Learners By Invite Date (Curriculum Area Summary)</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer?%2fEnrolment+2122%2fLearners+Enrolled+during+Main+Enrolment&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Learners enrolled during Main Enrolment</a></li>
+                        <li class="list-group-item"><a href="http://staff.wlc.ac.uk/staff_portal/reports/42DayReport/" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> 42 Day Report (Main Version)</a></li>
+                        <li class="list-group-item"><a href="http://staff.wlc.ac.uk/staff_portal/reports/42DayMathsAndEnglishReport/" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> 42 Day Report for Maths and English</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md mt-3">
+                    <h4>
+                        <i class="fas fa-thumbs-up"></i> Outcomes
+                    </h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fSAR%2fAchievement+Rate+Analysis&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Achievement Rate Analysis</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/reportserver?%2fSAR%2fAchievement+Rate+Analysis_Apprenticeships&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Achievement Rate Analysis Apprenticeships</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fSAR%2fAchievement+Rate+Analysis&rs:Command=Render&ShowAppsTables=N" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Achievement Rate Analysis Study Programmes</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fSAR+2021%2fET+Predicted+Success+Rates+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Predicted Achievement - E&T</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fSAR+2021%2fApps+Predicted+Success+Rates+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Predicted Achievement - ER</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fSAR+2021%2fAt+Risk+Compliance+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> At Risk Compliance 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fSAR+2021%2fCollege+SAR+2021+-+with+Fails+Missing&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> College SAR 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fSAR+2021%2fCollege+SAR+2021+-+In+Year&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> College SAR 20/21 - In Year</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fSAR+2021%2fAP+SAR+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Assistant Principal SAR 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fSAR+2021%2fCA+SAR+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Assistant Principal SAR 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fSAR+2021%2fSubContractor+SAR+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> SubContractor SAR 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fSAR+2021%2fET+Rules+Applied+By+Course+Summary+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> ARP E&T Rules Applied By Course 20/21</a></li>
+                        <li class="list-group-item"><a href="http://ssrs/ReportServer/Pages/ReportViewer.aspx?%2fSAR+2021%2fER+Apprenticeship+Overalll+By+Course+Summary+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> ER Apprenticeships (Overall) By Course 20/21</a></li>
+                        <li class="list-group-item"><a href="http://ssrs/ReportServer/Pages/ReportViewer.aspx?%2fSAR+2021%2fOverall+Achievement+Rates+by+Curriculum+Area+and+Qual+Size+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Overall Achievement by Curriculum Area & Qual Size / Programme Type</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-pobi001a/Reports/powerbi/ProAchieve/ProAchieve?rs:embed=true" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> ProAchieve Dashboard</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md mt-3">
+                    <h4>
+                        <i class="fas fa-clipboard-check"></i> Attendance
+                    </h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fAttendance%2f2020-21%2fAttendance+Report+by+College+Structure+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Attendance By College Structure 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fAttendance%2f2020-21%2fCollege+Attendance+Summary+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> College Attendance Summary 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fAttendance%2f2020-21%2fCollege+Attendance+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> College Attendance 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-pobi001a/Reports/powerbi/Attendance/Attendance%202021?rs:embed=true" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Attendance Dashboard 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fAttendance%2f2020-21%2fTermly+Attendance+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Termly Attendance 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fAttendance%2f2020-21%2fNo+shows+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> No Shows 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fAttendance%2f2020-21%2fUnmarked+Register+Summary+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Unmarked Register Summary 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fAttendance%2f2020-21%2fStudent+Attendance+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> At Risk Attendance 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fAttendance%2f2020-21%2fAttendance+Study+Programmes+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Attendance Study Programmes 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fAttendance%2f2020-21%2fAttendance+English+And+Maths+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Attendance English And Maths 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fAttendance%2f2020-21%2fVulnerable+Learners+Attendance+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Vulnerable Learners Attendance 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fAttendance%2f2020-21%2fCompletely+Withdrawn+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Withdrawals and Not Attending 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fAttendance%2f2020-21%2fWDR001a+-+Withdrawals+and+Transfers+by+Month+Summary&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Withdrawals and Transfers by Month (WDR001a) 20/21</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md mt-3">
+                    <h4>
+                        <i class="fas fa-pound-sign"></i> Funding
+                    </h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fFunding+2020+-+2021%2f2021+Funding+Report&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Funding Report 20/21 - Submitted Return</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fFunding+2020+-+2021%2f2021+Funding+Report+Weekly&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Funding Report 20/21 - Weekly Current Return</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fFunding+2020+-+2021%2f2021+Funding+Report+R14&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Funding Report 20/21 - R14</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fFunding+Report+1920+Revamped%2f1920+Funding+Report&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Funding Report 19/20 - R14 Final Submitted Return</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md mt-3">
+                    <h4>
+                        <i class="fas fa-user-plus"></i> Admissions
+                    </h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fAdmissions%2fApplications+Offers+By+CA+Offering+-+Conversion+Rates&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Applications & Offers - Conversion Rates</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fAdmissions%2fApplications+By+Month&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Applications & Offers - By Month</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md mt-3">
+                    <h4>
+                        <i class="fas fa-question-circle"></i> Other
+                    </h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fPerformance+Indicators%2fCurriculum+Efficiency+Audit+2021&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Curriculum Efficiency Audit 20/21</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fPerformance+Indicators%2fCurriculum+Efficiency+Audit+1920&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Curriculum Efficiency Audit 19/20</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fPerformance+Indicators%2froom_utilisation_overview&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Room Utilisation</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fTimetables%2fTimetables+with+Unknown+Staff&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Timetables with Unknown Staff 19/20</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fDestination+and+Progression%2fDES003a+-+Level+Progression+Between+Years+-+Summary&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Internal Progression Summary - Enrolment</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fDestination+and+Progression%2fDES002a+-+Learner+Destinations&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Destination Summary</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md mt-3">
+                    <h4>
+                        <i class="fas fa-file-archive"></i> Archived
+                    </h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fSAR+2021%2f2021+Achievement+Rates+Modelling&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Achievement Rates Modelling 20/21 (At Risk Report)</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fSAR+2021%2fPQ_SRA_at_Risk_LO+2021_Covid&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Achievement Rates Modelling 20/21 (Covid Risk)</a></li>
+                        <li class="list-group-item"><a href="http://wlcba-ssrs001a.hwlc.ac.uk/ReportServer/Pages/ReportViewer.aspx?%2fDestination+and+Progression%2fDES001a+-+Internal+Progression+Summary&rs:Command=Render" target="_blank" rel="noopener"><i class="fas fa-chevron-circle-right"></i> Internal Progression Summary - Applications</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md mt-3">
+                    <div class="alert alert-primary" role="alert">
+                        <h4 class="alert-heading">Report Request</h4>
+                        <p>
+                            To request a report or for an existing report to be modified please discuss with the appropriate SLT member in your area.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md">
+                    <div class="bd-callout bd-callout-info">
+                        <h4>Guidance</h4>
+                        <p>
+                            The data presented here is extracted from the College central student record system. It is imperative that student data is collected and maintained in one place and then reported as the single source of the truth.
+                        </p>
+                        <p>
+                            It is the responsibility of all staff who process data to ensure it is accurately recorded on the student record system(s) in a timely manner.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="alert alert-primary" role="alert">
+                        <h4 class="alert-heading">Data Accuracy</h4>
+                        <p>
+                            The following services can support you in getting your data accurate:
+                            <ul class="list-group">
+                                <li class="list-group-item"><i class="fas fa-chevron-circle-right"></i> Attendance & Enrolments - <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=26&area=services&title=Registry%20and%20Exams" target="_blank" rel="noopener">Registry</a></li>
+                                <li class="list-group-item"><i class="fas fa-chevron-circle-right"></i> Utilisation - <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=19&area=services&title=Human%20Resources" target="_blank" rel="noopener">Human Resources (HR)</a> for staffing</li>
+                                <li class="list-group-item"><i class="fas fa-chevron-circle-right"></i> Timetables - <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=85&area=services&title=Information%20Systems" target="_blank" rel="noopener">Information Systems (IS)</a></li>
+                            </ul>
+                        </p>
+                        <p>
+                            If you are unsure about the information on this site please contact the <a href="https://staff.wlc.ac.uk/staff_portal/services/default_beta.asp?cs_id=85&area=services&title=Information%20Systems" target="_blank" rel="noopener">Information Systems team (IS)</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="alert alert-warning" role="alert">
+                        <h4 class="alert-heading">Data Protection</h4>
+                        <p>
+                            Data privacy is relevant to, and the responsibility of, everyone at the College. We all need to be aware and know how to handle data securely and confidentially. It is up to all of us to look after information and keep it secure.
+                        </p>
+                        <p>
+                            Visit the <a href="http://staff.wlc.ac.uk/staff_portal/induction/dataprotection.asp" target="_blank" rel="noopener">Data Protection</a> site for more information.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
